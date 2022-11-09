@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  este stack va a crear 
+  una instancia y todo 
+  lo requerido
+Resources:
+  WedServer:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      ImageId: "ami-08c40ec9ead489470"
+    
