@@ -8,4 +8,23 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties: 
       ImageId: "ami-08c40ec9ead489470"
-    
+      KeyName: "new-key"
+      InstanceType: "t3.micro"
+      SecurityGroupIds:
+        - Ref: SecurityGroupSSH
+  SecurityGroupSSH:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "security group que permite acceso ssh"
+      VpcId: "vpc-0fb2c2fa3c3cae44b"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 0
+          CidrIp: 0.0.0.0/0
+
