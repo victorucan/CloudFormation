@@ -8,7 +8,7 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties: 
       ImageId: "ami-08c40ec9ead489470"
-      KeyName: "new-key"
+      KeyName: "jenk-nw"
       InstanceType: "t3.micro"
       SecurityGroupIds:
         - Ref: SecurityGroupSSH

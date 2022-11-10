@@ -1,0 +1,57 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  este stack va a crear 
+  una instancia y todo 
+  lo requerido
+
+Parameters:
+  VpcIdParameter:
+    Type: String
+  KeyParameter:
+    Type: String
+  AmiIdParameter:
+    Type: String
+
+  InstanceTypeParameter:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t3.micro
+      - t3.small
+      - t2.micro
+    Description: el tipo de instancia a crear
+
+Outputs:
+  IdInstancia:
+    Description: Id de la instancia que hamos creado
+    Value: 
+      Ref: WedServer
+
+Resources:
+  WedServer:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      ImageId: 
+        Ref: AmiIdParameter
+      KeyName: 
+        Ref: KeyParameter
+      InstanceType: 
+        Ref: InstanceTypeParameter
+      SecurityGroupIds:
+        - Ref: SecurityGroupSSH
+  SecurityGroupSSH:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "security group que permite acceso ssh"
+      VpcId: 
+        Ref: VpcIdParameter
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: 0
+          ToPort: 0
+          CidrIp: 0.0.0.0/0
